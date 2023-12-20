@@ -67,8 +67,8 @@ resource "kubernetes_namespace" "argocd" {
   }
 }
 
-resource "helm_release" "argocd-staging" {
-  name       = "argocd-staging"
+resource "helm_release" "argocd" {
+  name       = "argocd"
   chart      = "argo-cd"
   repository = "https://argoproj.github.io/argo-helm"
   version    = "5.27.3"
@@ -84,11 +84,11 @@ resource "null_resource" "password" {
   }
 }
 
-## delete argo-cd password
-##resource "null_resource" "del-argo-pass" {
-##  depends_on = [null_resource.password]
-##  provisioner "local-exec" {
-##    command = "kubectl -n argocd delete secret argocd-initial-admin-secret"
-##  }
-##}
+# delete argo-cd password
+#resource "null_resource" "del-argo-pass" {
+#  depends_on = [null_resource.password]
+#  provisioner "local-exec" {
+#    command = "kubectl -n argocd delete secret argocd-initial-admin-secret"
+#  }
+#}
 
